@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminLoginController;
-
+use App\Http\Controllers\admin\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin/'] , function() {
-    Route::get('login', [AdminLoginController::class, 'index'])->name('admin.login');
+Route::group(['prefix' => 'admin'] , function() {
+    Route::group(['middleware' => 'admin.guest'], function() {
+        Route::get('/login',  [AdminLoginController::class, 'index'])->name('admin.login');
+        Route::post('/authenticate',  [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+    });
+    Route::group(['middleware' => 'admin.auth'], function() {
+        Route::get('/logout',  [AdminLoginController::class, 'logout'])->name('admin.logout');
+        Route::get('/dashboard',  [DashboardController::class, 'index'])->name('admin.dashboard');
+    });
 });

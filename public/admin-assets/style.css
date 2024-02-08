@@ -52,7 +52,6 @@ textarea {
     font-size: 16px;
 }
 .form-control:hover {
-    color:red;
     border-bottom: 1px solid #9cf;
 }
 input[type="submit"] {
@@ -74,4 +73,32 @@ input[type="submit"] {
     transition: all .5s;
     position: relative;
     overflow: hidden;
+}
+
+.invalid-error {
+    color:red;
+    font-size: 12px;
+    -moz-animation: hideErrorAnim 0s ease-in 3s forwards;
+    /* Firefox */
+    -webkit-animation: hideErrorAnim 0s ease-in 3s forwards;
+    /* Safari and Chrome */
+    -o-animation: hideErrorAnim 0s ease-in 3s forwards;
+    /* Opera */
+    animation: hideErrorAnim 0s ease-in 3s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes hideErrorAnim {
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes hideErrorAnim {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
 }

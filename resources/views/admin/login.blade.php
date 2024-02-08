@@ -15,13 +15,24 @@
             <div class="login-container">
                 <div class="top-wrap">ADMIN</div>
                 <div class="bottom-wrap">
-                    <p>
-                        <input type="text" class="form-control" value="{{old('email')}}" name="email" placeholder="Email">
-                    </p>
-                    <p>
-                        <input type="password" class="form-control" value="" name="password" placeholder="Password">
-                    </p>
-                    <input type="submit" value="Login">
+                    <form action="{{ route('admin.authenticate')}}" method="post">
+                        @csrf
+                        <p>
+                            <input type="text" class="form-control" value="{{old('email')}}" name="email" placeholder="Email">
+                        </p>
+                        @error('email')
+                            <p class="invalid-error"> {{ $message}}</p>
+                        @enderror
+                        <p>
+                            <input type="password" class="form-control" value="" name="password" placeholder="Password">
+                        </p>
+                        
+                        @error('msg')
+                            <p class="invalid-error"> {{ $message}}</p>
+                        @enderror
+
+                        <input type="submit" value="Login">
+                    </form>
                 </div>
             </div>
         </div>
